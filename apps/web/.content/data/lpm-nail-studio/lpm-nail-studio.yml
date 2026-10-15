@@ -1,0 +1,58 @@
+name: LPM Nail Studio
+name_th: แอลพีเอ็ม เนล สตูดิโอ
+description: Gel nails and nail art in the town centre, booking by LINE.
+description_th: ทำเล็บเจลและเพ้นท์เล็บในตัวเมือง จองผ่าน LINE
+source_url: ''
+category: nail-salons
+tags:
+- sample
+featured: false
+status: approved
+sample: true
+city: lam-plai-mat
+area: town
+address: Thetsaban 1 Rd, Lam Plai Mat, Buriram 31130
+geo:
+  lat: 15.0275
+  lng: 102.8405
+location:
+  address: Thetsaban 1 Rd, Lam Plai Mat, Buriram 31130
+  city: Lam Plai Mat
+  country: TH
+  latitude: 15.0275
+  longitude: 102.8405
+phone: "+66800000302"
+line_id: '@sample-lpmnail'
+hours:
+  mon:
+  - 10:00-19:00
+  tue: []
+  wed:
+  - 10:00-19:00
+  thu:
+  - 10:00-19:00
+  fri:
+  - 10:00-19:00
+  sat:
+  - 10:00-19:00
+  sun:
+  - 10:00-19:00
+price_band: 1
+rating: 4.7
+rating_count: 23
+claimed: true
+amenities:
+  gel-acrylic: true
+  air-con: true
+  english-spoken: false
+updated_by: owner
+updated_at: "2026-10-13 13:45"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Gel nails and nail art in the town centre, booking by LINE.
+
+
+  Gel colour from ฿250, nail art from ฿350.
+
+  '

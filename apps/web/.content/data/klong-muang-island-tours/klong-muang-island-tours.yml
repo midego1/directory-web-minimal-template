@@ -1,0 +1,62 @@
+name: Klong Muang Island Tours
+name_th: คลองม่วง ไอส์แลนด์ ทัวร์
+description: Private longtail trips to Hong Islands and the 4 Islands from Klong Muang beach.
+description_th: เรือหางยาวส่วนตัวไปหมู่เกาะห้องและทัวร์ 4 เกาะ จากหาดคลองม่วง
+source_url: ''
+category: tours
+tags:
+- sample
+- island-hopping
+- family-friendly
+featured: false
+status: approved
+sample: true
+city: krabi
+area: klong-muang
+address: Klong Muang Beach Rd, Nong Thale, Krabi 81180
+geo:
+  lat: 8.0552
+  lng: 98.7655
+location:
+  address: Klong Muang Beach Rd, Nong Thale, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0552
+  longitude: 98.7655
+phone: "+66800000108"
+line_id: '@sample-kmtours'
+whatsapp: "+66800000108"
+hours:
+  mon:
+  - 07:00-19:00
+  tue:
+  - 07:00-19:00
+  wed:
+  - 07:00-19:00
+  thu:
+  - 07:00-19:00
+  fri:
+  - 07:00-19:00
+  sat:
+  - 07:00-19:00
+  sun:
+  - 07:00-19:00
+price_band: 2
+rating: 4.7
+rating_count: 119
+claimed: true
+amenities:
+  hotel-pickup: true
+  english-spoken: true
+  card-accepted: false
+updated_by: owner
+updated_at: "2026-10-11 07:20"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Private longtail trips to Hong Islands and the 4 Islands from Klong Muang beach.
+
+
+  Private longtail for up to 6 people from ฿3,000. National park fee not included.
+
+  '

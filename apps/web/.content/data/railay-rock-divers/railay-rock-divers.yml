@@ -1,0 +1,63 @@
+name: Railay Rock Divers
+name_th: ไร่เลย์ ร็อค ไดฟ์เวอร์ส
+description: PADI courses and fun dives around Koh Phi Phi and the Krabi islands.
+description_th: คอร์ส PADI และดำน้ำรอบเกาะพีพีและหมู่เกาะกระบี่
+source_url: ''
+category: dive-shops
+tags:
+- sample
+- island-hopping
+featured: false
+status: approved
+sample: true
+city: krabi
+area: railay
+address: Railay East, Railay, Krabi 81180
+geo:
+  lat: 8.0105
+  lng: 98.8395
+location:
+  address: Railay East, Railay, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0105
+  longitude: 98.8395
+phone: "+66800000106"
+line_id: '@sample-railaydivers'
+whatsapp: "+66800000106"
+hours:
+  mon:
+  - 08:00-19:00
+  tue:
+  - 08:00-19:00
+  wed:
+  - 08:00-19:00
+  thu:
+  - 08:00-19:00
+  fri:
+  - 08:00-19:00
+  sat:
+  - 08:00-19:00
+  sun:
+  - 08:00-19:00
+hours_note: Closed 1 Oct – 15 Oct for boat maintenance.
+price_band: 3
+rating: 4.9
+rating_count: 64
+claimed: true
+amenities:
+  padi: true
+  english-spoken: true
+  hotel-pickup: true
+  card-accepted: true
+updated_by: owner
+updated_at: "2026-10-02 18:40"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  PADI courses and fun dives around Koh Phi Phi and the Krabi islands.
+
+
+  Open Water course ฿14,500, two fun dives from ฿3,900 including lunch.
+
+  '

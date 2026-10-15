@@ -16,6 +16,7 @@
  * ```
  */
 
+import { parse as parseYaml } from 'yaml';
 import { createAdapter, resolveAdapterConfig } from '@ever-works/adapters';
 import { loadContent, ContentCache } from '@ever-works/core';
 import type { ContentData, ContentCacheConfig } from '@ever-works/core';
@@ -159,6 +160,28 @@ export async function getContent(): Promise<ContentData> {
 		data = await runner.runDataLoaded(data, baseContext);
 		return data;
 	});
+}
+
+/**
+ * Read and parse a YAML file from the content repository that no core loader reads
+ * (for example `cities.yml` or `amenities.yml` in the SoiGuru data repo).
+ *
+ * @param path - Path relative to the content root
+ * @returns The parsed value, or `undefined` when the file does not exist
+ * @throws {Error} When the file exists but is not valid YAML
+ */
+export async function readContentYaml(path: string): Promise<unknown> {
+	const adapter = await getAdapter();
+	if (!(await adapter.exists(path))) return undefined;
+	const raw = await adapter.readFile(path);
+	try {
+		return parseYaml(raw);
+	} catch (err) {
+		throw new Error(
+			`[content] ${path} is not valid YAML.\n` +
+			`Original error: ${err instanceof Error ? err.message : String(err)}`
+		);
+	}
 }
 
 /**

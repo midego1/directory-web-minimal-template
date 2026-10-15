@@ -1,76 +1,67 @@
 ---
 /**
- * Home Page — Lists all approved items with basic navigation.
- *
- * Shows a hero section, category navigation, and a paginated grid
- * of all directory items. Uses plugin-pagination for page slicing
- * and plugin-seo for structured data.
+ * SoiGuru landing (`/`) — the cities. One brand, many cities: each row opens that city's
+ * home. The template's generic item listing moved to `/directory`.
  */
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getContent } from '../lib/content';
-import { paginate } from '@ever-works/plugin-pagination';
-import { generateJsonLd } from '@ever-works/plugin-seo';
-import Hero from '@ever-works/ui/astro/Hero.astro';
-import CategoryList from '@ever-works/ui/astro/CategoryList.astro';
-import ItemGrid from '@ever-works/ui/astro/ItemGrid.astro';
-import EmptyState from '@ever-works/ui/astro/EmptyState.astro';
-import Pagination from '@ever-works/ui/astro/Pagination.astro';
+import SoiGuruLayout from '../layouts/SoiGuruLayout.astro';
+import TopBar from '../components/soiguru/TopBar.astro';
+import Icon from '../components/soiguru/Icon.astro';
+import OwnerCta from '../components/soiguru/OwnerCta.astro';
+import { getSoiGuru, cityListings, claimUrl } from '../lib/soiguru/data';
 
-const { items, categories, config } = await getContent();
-
-/** Hero title: prefer config.homepage.hero_title, fall back to company name */
-const heroTitle = config.homepage?.hero_title ?? config.company_name;
-
-/** Hero subtitle: prefer config.homepage.hero_description, fall back to item count */
-const heroSubtitle = config.homepage?.hero_description
-    ?? `Browse ${items.length} ${items.length === 1 ? config.item_name : config.items_name}`;
-
-// Paginate items — page 1 of the full listing
-const perPage = config.pagination?.itemsPerPage ?? 12;
-const pagination = paginate(items, { page: 1, perPage });
-const totalPages = Math.ceil(items.length / perPage);
-
-// JSON-LD for the homepage
-const siteUrl = (config.app_url ?? '').replace(/\/$/, '');
-const jsonLd = generateJsonLd('WebSite', {
-    type: 'WebSite',
-    name: config.company_name,
-    url: config.app_url ?? '',
-});
-const breadcrumbLd = generateJsonLd('BreadcrumbList', {
-    type: 'BreadcrumbList',
-    items: [{ name: 'Home', url: `${siteUrl}/` }],
-});
+const data = await getSoiGuru();
+const { config, cities } = data;
+const siteUrl = (Astro.site?.href ?? '').replace(/\/$/, '');
+const jsonLd = [
+    { '@context': 'https://schema.org', '@type': 'WebSite', name: config.company_name, url: `${siteUrl}/` },
+    {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: cities.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, url: `${siteUrl}/${c.id}` })),
+    },
+];
 ---
 
-<BaseLayout title="Home" config={config}>
-    <Fragment slot="head">
-        <script is:inline type="application/ld+json" set:html={jsonLd} />
-        <script is:inline type="application/ld+json" set:html={breadcrumbLd} />
-    </Fragment>
+<SoiGuruLayout
+    title={`${config.company_name}: local places in ${cities.map((c) => c.name).join(', ')}`}
+    description={`Find what's open near you in ${cities.map((c) => c.name).join(', ')}: restaurants, massage, nail salons, scooters, tours and more, in English and Thai.`}
+    config={config}
+    path="/"
+    jsonLd={jsonLd}
+>
+    <TopBar />
+    <main>
+        <div class="sg-header">
+            <h1 class="tkg-display">Find anything<br />near you in Thailand</h1>
+            <p class="tkg-body tkg-muted" style="margin:0">Pick a city. Places, opening hours and contacts in English and Thai.</p>
+        </div>
 
-    <Hero
-        title={heroTitle}
-        subtitle={heroSubtitle}
-    />
-
-    {categories.length > 0 && (
-        <section data-component="category-nav">
-            <h2 data-part="heading">Categories</h2>
-            <CategoryList categories={categories} showCounts />
+        <section class="tkg-section">
+            <div class="tkg-section-h"><h2>Cities<small>เมือง</small></h2></div>
+            <div class="tkg-rows">
+                {
+                    cities.map((city) => {
+                        const count = cityListings(data, city).length;
+                        return (
+                            <a class="tkg-row" href={`/${city.id}`}>
+                                <div class="tkg-row-main">
+                                    <span class="tkg-strong">{city.name}</span>
+                                    <small>
+                                        {[city.name_th, city.province && city.province !== city.name ? city.province : null, `${count} ${count === 1 ? 'place' : 'places'}`]
+                                            .filter(Boolean)
+                                            .join(' · ')}
+                                    </small>
+                                </div>
+                                <Icon name="chevron-right" class="tkg-i-chev" />
+                            </a>
+                        );
+                    })
+                }
+            </div>
         </section>
-    )}
 
-    <section data-component="item-listing">
-        <h2 data-part="heading">All {config.items_name}</h2>
-        {pagination.items.length === 0 ? (
-            <EmptyState message={`No ${config.items_name.toLowerCase()} found.`} />
-        ) : (
-            <ItemGrid items={pagination.items} columns={3} />
-        )}
-
-        {totalPages > 1 && (
-            <Pagination currentPage={1} totalPages={totalPages} baseUrl="/" />
-        )}
-    </section>
-</BaseLayout>
+        <div class="tkg-section" style="padding-bottom:24px">
+            <OwnerCta href={claimUrl(config)} />
+        </div>
+    </main>
+</SoiGuruLayout>

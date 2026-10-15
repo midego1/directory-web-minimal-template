@@ -1,0 +1,60 @@
+name: Nimman Slow Bar
+name_th: นิมมาน สโลว์บาร์
+description: Pour-over coffee from northern Thai farms in a small Nimman soi café.
+description_th: กาแฟดริปจากไร่ในภาคเหนือ ร้านเล็กๆ ในซอยนิมมาน
+source_url: ''
+category: cafes
+tags:
+- sample
+- local-favourite
+- northern-thai
+featured: false
+status: approved
+sample: true
+city: chiang-mai
+area: nimman
+address: Soi 9, Nimmanhaemin Rd, Su Thep, Chiang Mai 50200
+geo:
+  lat: 18.8
+  lng: 98.9675
+location:
+  address: Soi 9, Nimmanhaemin Rd, Su Thep, Chiang Mai 50200
+  city: Chiang Mai
+  country: TH
+  latitude: 18.8
+  longitude: 98.9675
+phone: "+66800000201"
+line_id: '@sample-nimmanslow'
+hours:
+  mon:
+  - 08:00-17:00
+  tue:
+  - 08:00-17:00
+  wed: []
+  thu:
+  - 08:00-17:00
+  fri:
+  - 08:00-17:00
+  sat:
+  - 08:00-17:00
+  sun:
+  - 08:00-17:00
+price_band: 2
+rating: 4.8
+rating_count: 88
+claimed: true
+amenities:
+  wifi: true
+  air-con: true
+  card-accepted: true
+updated_by: owner
+updated_at: "2026-10-09 16:05"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Pour-over coffee from northern Thai farms in a small Nimman soi café.
+
+
+  Single-origin beans from Doi Saket and Mae Taeng, roasted in-house.
+
+  '

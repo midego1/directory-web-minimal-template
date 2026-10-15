@@ -1,0 +1,276 @@
+---
+/**
+ * ListingPage (`/<city>/<area>/<slug>`, e.g. `/krabi/ao-nang/krabi-nail`) — one business,
+ * in the order of a visitor's questions: what is it, can I go now, how do I reach it, when
+ * is it open, what should I know, where exactly, is this trustworthy, what else is near.
+ *
+ * Server-rendered with `LocalBusiness` JSON-LD (with `openingHoursSpecification`) so it
+ * ranks for searches like "nail salon ao nang".
+ */
+import SoiGuruLayout from '../../../layouts/SoiGuruLayout.astro';
+import TopBar from '../../../components/soiguru/TopBar.astro';
+import Icon from '../../../components/soiguru/Icon.astro';
+import ListingPhoto from '../../../components/soiguru/ListingPhoto.astro';
+import OpenStatus from '../../../components/soiguru/OpenStatus.astro';
+import ContactBar from '../../../components/soiguru/ContactBar.astro';
+import HoursTable from '../../../components/soiguru/HoursTable.astro';
+import StaticMap from '../../../components/soiguru/StaticMap.astro';
+import ClaimBox from '../../../components/soiguru/ClaimBox.astro';
+import ListingCard from '../../../components/soiguru/ListingCard.astro';
+import { getSoiGuru, claimUrl, reportUrl, type Listing } from '../../../lib/soiguru/data';
+import { breadcrumbJsonLd, localBusinessJsonLd } from '../../../lib/soiguru/jsonld';
+import { priceBand, formatDate } from '../../../lib/soiguru/format';
+import { directionsUrl, distanceMetres } from '../../../lib/soiguru/geo';
+
+export async function getStaticPaths() {
+    const { listings } = await getSoiGuru();
+    return listings
+        .filter((l) => l.area)
+        .map((listing) => ({ params: { city: listing.city.id, area: listing.area!.id, slug: listing.slug }, props: { listing } }));
+}
+
+interface Props {
+    listing: Listing;
+}
+
+const { listing } = Astro.props;
+const data = await getSoiGuru();
+const { config } = data;
+const { city, area, category } = listing;
+const siteUrl = (Astro.site?.href ?? '').replace(/\/$/, '');
+const price = priceBand(listing.price_band);
+
+// Nearby: the closest other listings within 1.5 km; the browser shows the first two open.
+const nearby = listing.geo
+    ? data.listings
+            .filter((l) => l.slug !== listing.slug && l.city.id === city.id && l.geo)
+            .map((l) => ({ l, d: distanceMetres(listing.geo!, l.geo!) }))
+            .filter((x) => x.d <= 1500)
+            .sort((a, b) => a.d - b.d)
+            .slice(0, 8)
+    : [];
+
+const provenance =
+    listing.updated_by === 'owner' ? 'Updated by the owner' : listing.updated_by === 'editor' ? 'Updated by SoiGuru' : 'Added from public sources';
+const report = reportUrl(config, listing);
+const subTitle = [listing.name_th, category?.name_th ?? category?.name].filter(Boolean).join(' · ');
+const trail: [string, string][] = [
+    [config.company_name, '/'],
+    [city.name, `/${city.id}`],
+    ...(category ? ([[category.name, `/${city.id}/${category.id}`]] as [string, string][]) : []),
+    [listing.name, listing.url],
+];
+---
+
+<SoiGuruLayout
+    title={`${listing.name}${listing.name_th ? ` · ${listing.name_th}` : ''}: ${category?.name ?? 'Place'} in ${area?.name ?? city.name}, ${city.name} · ${config.company_name}`}
+    description={`${listing.description} ${listing.address ?? ''}`.trim()}
+    config={config}
+    path={listing.url}
+    timeZone={city.timezone}
+    jsonLd={[localBusinessJsonLd(listing, siteUrl), breadcrumbJsonLd(siteUrl, trail)]}
+>
+    <TopBar
+        back={{ href: category ? `/${city.id}/${category.id}` : `/${city.id}`, label: 'Back' }}
+        title={listing.name}
+        titleTh={listing.name_th}
+        subtitle={[category?.name, area?.name].filter(Boolean).join(' · ')}
+        subtitleTh={[category?.name_th, area?.name_th].filter(Boolean).join(' · ') || undefined}
+    >
+        <button type="button" class="tkg-iconbtn" aria-label="Share" data-share={`${siteUrl}${listing.url}`} data-share-title={listing.name}>
+            <Icon name="external" />
+        </button>
+    </TopBar>
+
+    <main>
+        {
+            listing.images.length > 0 && (
+                <div class="tkg-strip" style="position:relative">
+                    <div class="sg-strip-photo"><ListingPhoto listing={listing} index={0} size={260} loading="eager" /></div>
+                    {listing.images.length > 1 && (
+                        <div class="tkg-strip-side">
+                            <ListingPhoto listing={listing} index={1} size={130} />
+                            {listing.images.length > 2 && <ListingPhoto listing={listing} index={2} size={130} />}
+                        </div>
+                    )}
+                    <span class="tkg-strip-count">
+                        <Icon name="camera" />
+                        {listing.images.length} {listing.images.length === 1 ? 'photo' : 'photos'}
+                    </span>
+                </div>
+            )
+        }
+
+        <div class="sg-title-block" data-listing={listing.slug} data-lat={listing.geo?.lat} data-lng={listing.geo?.lng} data-boat={area?.boat_only ? '1' : undefined}>
+            <div class="tkg-hstack" style="gap:8px;align-items:center">
+                <h1 class="tkg-title">{listing.name}</h1>
+                {
+                    listing.claimed && (
+                        <span class="tkg-badge">
+                            <Icon name="shield" />
+                            Verified owner
+                        </span>
+                    )
+                }
+                {listing.sample && <span class="tkg-badge tkg-badge-outline">Sample listing</span>}
+            </div>
+            {subTitle && <div class="tkg-body tkg-muted" style="margin-top:2px">{subTitle}</div>}
+            <div class="tkg-hstack" style="margin-top:8px;gap:12px">
+                <OpenStatus listing={listing} large />
+                {
+                    listing.rating !== undefined && (
+                        <span class="tkg-rating">
+                            <Icon name="star" />
+                            {listing.rating.toFixed(1)}
+                            {listing.rating_count !== undefined && <span class="tkg-muted sg-regular">({listing.rating_count})</span>}
+                        </span>
+                    )
+                }
+                {price && <span class="tkg-small tkg-muted">{price}</span>}
+            </div>
+            {
+                listing.address && (
+                    <div class="tkg-small tkg-muted" style="margin-top:8px">
+                        <Icon name="pin" class="tkg-i-16" /> {listing.address}
+                        <span data-distance data-walk></span>
+                    </div>
+                )
+            }
+            {
+                listing.updated_at && (
+                    <div class="tkg-small tkg-muted" style="margin-top:2px" data-updated-at={listing.updated_at} data-updated-by={listing.updated_by}>
+                        {provenance} on {formatDate(listing.updated_at)}
+                    </div>
+                )
+            }
+        </div>
+
+        <ContactBar listing={listing} />
+
+        <HoursTable listing={listing} />
+
+        {
+            listing.amenities.length > 0 && (
+                <section class="tkg-section">
+                    <div class="tkg-section-h">
+                        <h2>
+                            Good to know<small>สิ่งอำนวยความสะดวก</small>
+                        </h2>
+                    </div>
+                    <div class="tkg-amenities">
+                        {listing.amenities.map((a) =>
+                            a.available ? (
+                                <div>
+                                    <Icon name="check" />
+                                    <span data-th={a.name_th}>{a.name}</span>
+                                </div>
+                            ) : (
+                                <div class="tkg-no">
+                                    <Icon name="close" />
+                                    <span data-th={a.name_th ? `ไม่มี${a.name_th}` : undefined}>No {a.name.charAt(0).toLowerCase() + a.name.slice(1)}</span>
+                                </div>
+                            ),
+                        )}
+                    </div>
+                </section>
+            )
+        }
+
+        <section class="tkg-section">
+            <div class="tkg-section-h"><h2>About</h2></div>
+            <p class="tkg-body tkg-pad" style="margin:0">{listing.description}</p>
+            {listing.description_th && <p class="tkg-body tkg-pad tkg-muted tkg-th" lang="th" style="margin:8px 0 0">{listing.description_th}</p>}
+        </section>
+
+        {
+            listing.geo && (
+                <section class="tkg-section">
+                    <div class="tkg-section-h">
+                        <h2>
+                            Where{listing.address && <small>{listing.address}</small>}
+                        </h2>
+                        <a href={directionsUrl(listing.geo)} target="_blank" rel="noopener">
+                            Directions
+                        </a>
+                    </div>
+                    <div class="tkg-pad">
+                        <StaticMap point={listing.geo} />
+                    </div>
+                </section>
+            )
+        }
+
+        <ClaimBox listing={listing} href={claimUrl(config, listing)} />
+
+        {
+            nearby.length > 0 && (
+                <section class="tkg-section" data-open-now data-limit="2">
+                    <div class="tkg-section-h">
+                        <h2>Nearby · open now</h2>
+                        {category && <a href={`/${city.id}/${area?.id ?? ''}`}>More</a>}
+                    </div>
+                    <div class="tkg-rows">
+                        {nearby.map(({ l, d }, i) => (
+                            <ListingCard listing={l} compact distance={d} hidden={i >= 2} />
+                        ))}
+                    </div>
+                    <p class="sg-empty" data-open-empty hidden>
+                        Nothing nearby is open right now.
+                    </p>
+                </section>
+            )
+        }
+
+        <div class="sg-report">
+            {
+                report && (
+                    <a class="tkg-btn tkg-btn-ghost" href={report}>
+                        <Icon name="flag" />
+                        Report wrong info · แจ้งข้อมูลผิด
+                    </a>
+                )
+            }
+            <div class="tkg-small tkg-muted">
+                Listing {listing.slug}
+                {report && (
+                    <>
+                        {' · '}
+                        <a href={report}>Suggest an edit</a>
+                    </>
+                )}
+            </div>
+        </div>
+    </main>
+
+    {
+        listing.geo && (
+            <div class="tkg-bottombar" data-listing={listing.slug}>
+                <div class="tkg-bb-info">
+                    <OpenStatus listing={listing} />
+                    <small data-lat={listing.geo.lat} data-lng={listing.geo.lng}>
+                        <span data-distance>{area?.name ?? city.name}</span>
+                    </small>
+                </div>
+                <a class="tkg-btn" href={directionsUrl(listing.geo)} target="_blank" rel="noopener">
+                    <Icon name="navigation" />
+                    Directions
+                </a>
+            </div>
+        )
+    }
+</SoiGuruLayout>
+
+<script>
+    // Share sheet with the clean URL; falls back to copying it.
+    for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-share]')) {
+        btn.addEventListener('click', async () => {
+            const url = btn.dataset['share'] ?? location.href;
+            try {
+                if (navigator.share) await navigator.share({ title: btn.dataset['shareTitle'], url });
+                else await navigator.clipboard.writeText(url);
+            } catch {
+                // Cancelled by the visitor.
+            }
+        });
+    }
+</script>

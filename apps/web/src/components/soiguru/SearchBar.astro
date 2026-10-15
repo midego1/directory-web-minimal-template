@@ -1,0 +1,55 @@
+---
+/**
+ * SearchBar — the 48px pill with a 16px input (no iOS zoom) and examples in both scripts.
+ * Submits to `/<city>/search?q=`; the hint chips run a search rather than fill the field.
+ */
+import Icon from './Icon.astro';
+import type { City, Area } from '../../lib/soiguru/data';
+
+interface Props {
+    city: City;
+    /** Current query (results page) */
+    value?: string;
+    /** Show the hint chips under the bar */
+    hints?: boolean;
+    /** Area for the third hint chip */
+    area?: Area;
+}
+
+const { city, value = '', hints = false, area } = Astro.props;
+---
+
+<form class="sg-search-form" action={`/${city.id}/search`} method="get" role="search">
+    <label class="tkg-search">
+        <Icon name="search" />
+        <span class="sg-visually-hidden">Search {city.name}</span>
+        <input
+            type="search"
+            name="q"
+            value={value}
+            placeholder="Massage, scooter, nails… · นวด, เช่ามอเตอร์ไซค์"
+            autocomplete="off"
+            enterkeyhint="search"
+        />
+        <button class="tkg-search-btn" type="submit" data-th="ค้นหา">Search</button>
+    </label>
+    {
+        hints && (
+            <div class="tkg-search-hints">
+                <a class="tkg-chip tkg-chip-on" href={`/${city.id}/search?open=1`}>
+                    <Icon name="clock" />
+                    <span data-th="เปิดอยู่ตอนนี้">Open now</span>
+                </a>
+                <a class="tkg-chip" href={`/${city.id}/search?sort=nearest`} data-near-me>
+                    <Icon name="pin" />
+                    <span data-th="ใกล้ฉัน">Near me</span>
+                </a>
+                {area && (
+                    <a class="tkg-chip" href={`/${city.id}/${area.id}`} data-th={area.name_th}>
+                        {area.name}
+                    </a>
+                )}
+            </div>
+        )
+    }
+</form>

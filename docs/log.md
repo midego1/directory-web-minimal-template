@@ -3,6 +3,21 @@ title: "Change Log"
 sidebar_label: "Change Log"
 ---
 
+## 2026-10-15 — SoiGuru design port: landing, CityHome, CategoryResults, ListingPage (spec `.specify/features/soiguru-design.md`)
+
+First pass of the SoiGuru design (the "TheKrabiGuide" design system, renamed) in `apps/web`, built
+in parallel with the Next.js app for an A/B comparison. The design's `tkg-` component CSS is used
+1:1 (`src/styles/soiguru/components.css`) with tokens generated from its `tokens.json`; the icon set
+is rendered on the server (`src/lib/soiguru/icons.ts`).
+
+- New routes `/`, `/<city>`, `/<city>/<category|area>`, `/<city>/search`, `/<city>/<area>/<slug>`;
+  the generic item home moved to `/directory`.
+- `@ever-works/core` category loader passes extra keys through (`name_th`, `icon`), with a test.
+- `src/lib/content.ts` gains `readContentYaml()` for `cities.yml` / `amenities.yml`.
+- Open status, today's hours row, distances and the EN/TH swap run in a small page script;
+  results filters and the Leaflet/OpenStreetMap map in a second one (Leaflet `1.9.4` added).
+- Sample content from `soiguru-data` in `apps/web/.content` (15 SAMPLE listings).
+
 ## 2026-05-19 — Pin Vercel framework to "astro" via apps/web/vercel.json + workflow verification
 
 Live deploy failed on a custom-template Work with:

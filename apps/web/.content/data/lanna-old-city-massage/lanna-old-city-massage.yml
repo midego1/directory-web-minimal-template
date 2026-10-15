@@ -1,0 +1,61 @@
+name: Lanna Old City Massage
+name_th: ล้านนา นวดคูเมือง
+description: Northern-style tok sen and Thai massage inside the old city moat.
+description_th: นวดตอกเส้นและนวดแผนไทยแบบล้านนา ในคูเมือง
+source_url: ''
+category: massage
+tags:
+- sample
+- spa
+- northern-thai
+featured: false
+status: approved
+sample: true
+city: chiang-mai
+area: old-city
+address: Ratchadamnoen Rd, Phra Sing, Chiang Mai 50200
+geo:
+  lat: 18.788
+  lng: 98.989
+location:
+  address: Ratchadamnoen Rd, Phra Sing, Chiang Mai 50200
+  city: Chiang Mai
+  country: TH
+  latitude: 18.788
+  longitude: 98.989
+phone: "+66800000202"
+whatsapp: "+66800000202"
+hours:
+  mon:
+  - 10:00-21:00
+  tue:
+  - 10:00-21:00
+  wed:
+  - 10:00-21:00
+  thu:
+  - 10:00-21:00
+  fri:
+  - 10:00-21:00
+  sat:
+  - 10:00-21:00
+  sun:
+  - 10:00-21:00
+price_band: 1
+rating: 4.5
+rating_count: 132
+claimed: false
+amenities:
+  air-con: true
+  walk-ins: true
+  english-spoken: true
+updated_by: import
+updated_at: "2026-08-30 10:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Northern-style tok sen and Thai massage inside the old city moat.
+
+
+  Thai massage from ฿250 / hour, tok sen from ฿400.
+
+  '

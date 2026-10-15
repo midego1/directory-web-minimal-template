@@ -1,0 +1,65 @@
+name: Klong Muang Beach Lodge
+name_th: คลองม่วง บีช ลอดจ์
+description: Twenty bungalows in a garden on a quiet beach, with a pool and breakfast.
+description_th: บังกะโล 20 หลังในสวนริมหาดที่เงียบสงบ มีสระว่ายน้ำและอาหารเช้า
+source_url: ''
+category: hotels
+tags:
+- sample
+- beachfront
+- family-friendly
+featured: false
+status: approved
+sample: true
+city: krabi
+area: klong-muang
+address: Klong Muang Beach, Nong Thale, Krabi 81180
+geo:
+  lat: 8.0575
+  lng: 98.7628
+location:
+  address: Klong Muang Beach, Nong Thale, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0575
+  longitude: 98.7628
+phone: "+66800000109"
+line_id: '@sample-kmlodge'
+whatsapp: "+66800000109"
+hours:
+  mon:
+  - 00:00-24:00
+  tue:
+  - 00:00-24:00
+  wed:
+  - 00:00-24:00
+  thu:
+  - 00:00-24:00
+  fri:
+  - 00:00-24:00
+  sat:
+  - 00:00-24:00
+  sun:
+  - 00:00-24:00
+price_band: 3
+rating: 4.6
+rating_count: 243
+claimed: false
+amenities:
+  pool: true
+  breakfast: true
+  wifi: true
+  parking: true
+  air-con: true
+  sea-view: true
+updated_by: import
+updated_at: "2026-09-10 09:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Twenty bungalows in a garden on a quiet beach, with a pool and breakfast.
+
+
+  Garden bungalows from ฿1,800 / night including breakfast. Reception open 24 hours.
+
+  '

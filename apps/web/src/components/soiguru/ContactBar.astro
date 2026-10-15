@@ -1,0 +1,53 @@
+---
+/**
+ * ContactBar — Call, LINE, WhatsApp, Directions as real deep links, 56px tall. A missing
+ * channel is left out and the grid reflows; never a disabled button. Below it the raw
+ * phone and LINE id in text (copyable) and the owner's booking note.
+ *
+ * The LINE and WhatsApp buttons use their brand fills. The design calls for the official
+ * marks from each company's brand resources; until those files are added this uses the
+ * generic chat glyph, as the design previews do.
+ */
+import Icon from './Icon.astro';
+import { formatThaiPhone, lineUrl, telUrl, whatsappUrl } from '../../lib/soiguru/format';
+import { directionsUrl } from '../../lib/soiguru/geo';
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+}
+
+const { listing } = Astro.props;
+const buttons = [
+    listing.phone && { href: telUrl(listing.phone), cls: '', icon: 'phone', label: 'Call · โทร', channel: 'call' },
+    listing.line_id && { href: lineUrl(listing.line_id), cls: 'tkg-c-line', icon: 'chat', label: 'LINE', channel: 'line' },
+    listing.whatsapp && { href: whatsappUrl(listing.whatsapp), cls: 'tkg-c-wa', icon: 'chat', label: 'WhatsApp', channel: 'whatsapp' },
+    listing.geo && { href: directionsUrl(listing.geo), cls: 'tkg-c-primary', icon: 'navigation', label: 'Directions', channel: 'directions' },
+].filter((b): b is { href: string; cls: string; icon: string; label: string; channel: string } => Boolean(b));
+const facts = [
+    listing.phone && formatThaiPhone(listing.phone),
+    listing.line_id && `LINE ${listing.line_id}`,
+    listing.booking_note,
+].filter(Boolean);
+---
+
+{
+    buttons.length > 0 && (
+        <div class="sg-contact-wrap">
+            <div class="tkg-contact" style={`grid-template-columns: repeat(${buttons.length}, 1fr)`}>
+                {buttons.map((b) => (
+                    <a
+                        href={b.href}
+                        class={b.cls || undefined}
+                        data-contact={b.channel}
+                        {...(b.channel === 'call' ? {} : { target: '_blank', rel: 'noopener' })}
+                    >
+                        <Icon name={b.icon} />
+                        {b.label}
+                    </a>
+                ))}
+            </div>
+            {facts.length > 0 && <div class="tkg-small tkg-muted tkg-pad sg-mt-2">{facts.join(' · ')}</div>}
+        </div>
+    )
+}

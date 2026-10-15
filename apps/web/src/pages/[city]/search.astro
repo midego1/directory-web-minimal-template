@@ -1,0 +1,41 @@
+---
+/**
+ * Search results (`/<city>/search?q=`): every listing of the city, narrowed in the browser
+ * by the query (name, category, area, in both scripts), "Open now" and area. Kept out of
+ * the search index; the category and area pages are the ones that rank.
+ */
+import SoiGuruLayout from '../../layouts/SoiGuruLayout.astro';
+import TopBar from '../../components/soiguru/TopBar.astro';
+import SearchBar from '../../components/soiguru/SearchBar.astro';
+import CategoryResults from '../../components/soiguru/CategoryResults.astro';
+import { getSoiGuru, cityListings, claimUrl, type City } from '../../lib/soiguru/data';
+
+export async function getStaticPaths() {
+    const { cities } = await getSoiGuru();
+    return cities.map((city) => ({ params: { city: city.id }, props: { city } }));
+}
+
+interface Props {
+    city: City;
+}
+
+const { city } = Astro.props;
+const data = await getSoiGuru();
+const { config } = data;
+---
+
+<SoiGuruLayout
+    title={`Search ${city.name} · ${config.company_name}`}
+    description={`Search places in ${city.name}.`}
+    config={config}
+    path={`/${city.id}/search`}
+    timeZone={city.timezone}
+    wide
+    noindex
+>
+    <TopBar back={{ href: `/${city.id}`, label: `Back to ${city.name}` }} title="Search · ค้นหา" subtitle={city.name} />
+    <main>
+        <div class="sg-search-wrap"><SearchBar city={city} /></div>
+        <CategoryResults city={city} listings={cityListings(data, city)} noun="places" ownerHref={claimUrl(config)} search />
+    </main>
+</SoiGuruLayout>

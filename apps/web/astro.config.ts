@@ -38,8 +38,8 @@ export default defineConfig({
 		// compat: true aliases react → preact/compat so shadcn/ui components work as-is
 		preact({ compat: true }),
 
-		// Auto-generate sitemap.xml
-		sitemap(),
+		// Auto-generate sitemap.xml (city search pages are noindex, so they stay out)
+		sitemap({ filter: (page) => !/\/search\/?$/.test(new URL(page).pathname) }),
 
 		// Ever Works plugin build hooks (onBeforeBuild, onAfterBuild)
 		// + webhook endpoint injection when ISR is enabled

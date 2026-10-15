@@ -1,0 +1,24 @@
+---
+/**
+ * OwnerCta — the quiet owner band at the end of the city home (`sun-tint`, one sentence,
+ * Claim). The only sun on the screen.
+ */
+interface Props {
+    cityName?: string;
+    href?: string;
+}
+
+const { cityName, href } = Astro.props;
+---
+
+{
+    href && (
+        <div class="tkg-ownercta">
+            <div>
+                <h3>Own a shop{cityName ? ` in ${cityName}` : ''}?</h3>
+                <p>Your listing is already here for free. Claim it to edit hours, photos and LINE for ฿100 / month.</p>
+            </div>
+            <a class="tkg-btn tkg-btn-sun tkg-btn-sm" href={href}>Claim</a>
+        </div>
+    )
+}

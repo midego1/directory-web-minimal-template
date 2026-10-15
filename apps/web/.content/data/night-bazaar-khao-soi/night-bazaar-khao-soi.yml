@@ -1,0 +1,62 @@
+name: Night Bazaar Khao Soi
+name_th: ข้าวซอยไนท์บาซาร์
+description: Khao soi and sai oua from a family stall near the Night Bazaar.
+description_th: ข้าวซอยและไส้อั่ว ร้านครอบครัวใกล้ไนท์บาซาร์
+source_url: ''
+category: restaurants
+tags:
+- sample
+- street-food
+- northern-thai
+- open-late
+- budget
+featured: false
+status: approved
+sample: true
+city: chiang-mai
+area: night-bazaar
+address: Chang Klan Rd, Chang Khlan, Chiang Mai 50100
+geo:
+  lat: 18.7855
+  lng: 99.0005
+location:
+  address: Chang Klan Rd, Chang Khlan, Chiang Mai 50100
+  city: Chiang Mai
+  country: TH
+  latitude: 18.7855
+  longitude: 99.0005
+phone: "+66800000203"
+hours:
+  mon:
+  - 16:00-23:30
+  tue:
+  - 16:00-23:30
+  wed:
+  - 16:00-23:30
+  thu:
+  - 16:00-23:30
+  fri:
+  - 16:00-23:30
+  sat:
+  - 16:00-23:30
+  sun:
+  - 16:00-23:30
+price_band: 1
+rating: 4.4
+rating_count: 210
+claimed: false
+amenities:
+  card-accepted: false
+  halal: true
+  walk-ins: true
+updated_by: import
+updated_at: "2026-07-28 12:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Khao soi and sai oua from a family stall near the Night Bazaar.
+
+
+  Chicken khao soi ฿60. Cash only.
+
+  '

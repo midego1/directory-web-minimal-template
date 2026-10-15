@@ -1,0 +1,54 @@
+---
+/**
+ * StaticMap — a fast "Where" map with no tiles library: the OpenStreetMap tiles around the
+ * point as plain lazy `<img>`s, positioned so the point sits in the centre, with a `sea` pin.
+ * Attribution is shown as OSM's tile policy requires.
+ */
+import { TILE_SIZE, worldPixel, type LatLng } from '../../lib/soiguru/geo';
+
+interface Props {
+    point: LatLng;
+    /** Map height in px */
+    height?: number;
+    zoom?: number;
+}
+
+const { point, height = 160, zoom = 16 } = Astro.props;
+const px = worldPixel(point, zoom);
+// Cover up to 640px wide and `height` tall around the point.
+const halfW = 320;
+const halfH = Math.ceil(height / 2);
+const x0 = Math.floor((px.x - halfW) / TILE_SIZE);
+const x1 = Math.floor((px.x + halfW) / TILE_SIZE);
+const y0 = Math.floor((px.y - halfH) / TILE_SIZE);
+const y1 = Math.floor((px.y + halfH) / TILE_SIZE);
+const tiles: { x: number; y: number; left: number; top: number }[] = [];
+for (let x = x0; x <= x1; x++) {
+    for (let y = y0; y <= y1; y++) {
+        tiles.push({ x, y, left: Math.round(x * TILE_SIZE - px.x), top: Math.round(y * TILE_SIZE - px.y) });
+    }
+}
+---
+
+<div class="tkg-map sg-static-map" style={`height:${height}px`}>
+    <div class="sg-static-map-tiles" aria-hidden="true">
+        {
+            tiles.map((t) => (
+                <img
+                    src={`https://tile.openstreetmap.org/${zoom}/${t.x}/${t.y}.png`}
+                    alt=""
+                    width={TILE_SIZE}
+                    height={TILE_SIZE}
+                    loading="lazy"
+                    decoding="async"
+                    style={`left:${t.left}px;top:${t.top}px`}
+                />
+            ))
+        }
+    </div>
+    <svg class="sg-static-map-pin" viewBox="-12 -24 24 32" aria-hidden="true">
+        <path class="tkg-m-pin-on" d="M0-18a9 9 0 0 1 9 9c0 6-9 15-9 15S-9-3-9-9a9 9 0 0 1 9-9Z"></path>
+        <circle class="tkg-m-pin-dot" cx="0" cy="-9" r="3"></circle>
+    </svg>
+    <span class="sg-map-attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></span>
+</div>

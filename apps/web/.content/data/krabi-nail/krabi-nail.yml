@@ -1,0 +1,64 @@
+name: Krabi Nail
+name_th: กระบี่ เนล
+description: Small nail salon on Soi 8, two minutes from the beach road. Manicure, pedicure, gel and acrylic.
+description_th: ร้านทำเล็บเล็กๆ ในซอย 8 ใกล้ถนนเลียบหาด ทำเล็บมือ เล็บเท้า เจล และอะคริลิก
+source_url: ''
+category: nail-salons
+tags:
+- sample
+- local-favourite
+featured: true
+status: approved
+sample: true
+city: krabi
+area: ao-nang
+address: 123/4 Ao Nang Rd, Soi 8, Ao Nang, Krabi 81180
+geo:
+  lat: 8.0331
+  lng: 98.8262
+location:
+  address: 123/4 Ao Nang Rd, Soi 8, Ao Nang, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0331
+  longitude: 98.8262
+phone: "+66800000101"
+line_id: '@sample-krabinail'
+whatsapp: "+66800000101"
+hours:
+  mon:
+  - 10:00-21:00
+  tue:
+  - 10:00-21:00
+  wed:
+  - 10:00-21:00
+  thu:
+  - 10:00-21:00
+  fri:
+  - 10:00-21:00
+  sat:
+  - 10:00-22:00
+  sun: []
+booking_note: Walk-ins welcome, booking by LINE on busy evenings.
+price_band: 2
+rating: 4.8
+rating_count: 212
+claimed: true
+amenities:
+  air-con: true
+  card-accepted: true
+  english-spoken: true
+  walk-ins: true
+  gel-acrylic: true
+  parking: false
+updated_by: owner
+updated_at: "2026-10-12 09:30"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Small nail salon on Soi 8, two minutes from the beach road. Manicure, pedicure, gel and acrylic.
+
+
+  Manicure from ฿300, gel from ฿500. Thai and English spoken; book by LINE on busy evenings.
+
+  '

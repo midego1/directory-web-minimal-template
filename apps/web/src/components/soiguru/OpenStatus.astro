@@ -1,0 +1,26 @@
+---
+/**
+ * OpenStatus — dot + sentence ("Open now · closes 21:00"). The state depends on the
+ * visitor's current time in the city, so the browser computes it from `data-hours`
+ * (see `scripts/soiguru/page.ts`); the server renders a neutral placeholder.
+ */
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+    /** `tkg-status-lg` on the listing page */
+    large?: boolean;
+}
+
+const { listing, large } = Astro.props;
+const hasHours = listing.hours !== null;
+---
+
+<span
+    class:list={['tkg-status', 'tkg-status-unknown', { 'tkg-status-lg': large }]}
+    data-status
+    data-hours={hasHours ? listing.hoursJson : undefined}
+    data-claimed={listing.claimed ? '1' : undefined}
+    data-updated={listing.updated_at}
+    data-th={hasHours ? undefined : 'ยังไม่ยืนยันเวลาเปิด'}
+>{hasHours ? 'Opening hours' : 'Hours not confirmed'}</span>
