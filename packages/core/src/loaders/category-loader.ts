@@ -35,6 +35,10 @@ export async function loadCategories(adapter: DataAdapter): Promise<CategoryData
                 .filter((entry): entry is Record<string, unknown> => entry !== null && typeof entry === 'object')
                 .filter((entry) => typeof entry['id'] === 'string' && typeof entry['name'] === 'string')
                 .map((entry) => ({
+                    // Pass extra keys through (e.g. `name_th`, `icon`) like the item loader does,
+                    // so vertical templates can carry localized labels without a core change.
+                    // Known keys are re-validated below, so a malformed one is still dropped.
+                    ...omitKnownKeys(entry),
                     id: entry['id'] as string,
                     name: entry['name'] as string,
                     ...(typeof entry['description'] === 'string' ? { description: entry['description'] } : {}),
@@ -50,4 +54,12 @@ export async function loadCategories(adapter: DataAdapter): Promise<CategoryData
 
     coreLogger.warn('No categories file found, returning empty array');
     return [];
+}
+
+/** Keys the loader validates itself; everything else passes through untouched. */
+const KNOWN_KEYS = new Set(['id', 'name', 'description', 'icon_url', 'icon_svg', 'image_url', 'priority']);
+
+/** Copy of a raw YAML entry without the keys the loader validates. */
+function omitKnownKeys(entry: Record<string, unknown>): Record<string, unknown> {
+    return Object.fromEntries(Object.entries(entry).filter(([key]) => !KNOWN_KEYS.has(key)));
 }

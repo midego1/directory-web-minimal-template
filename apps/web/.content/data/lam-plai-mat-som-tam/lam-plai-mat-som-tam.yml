@@ -1,0 +1,61 @@
+name: Lam Plai Mat Som Tam
+name_th: ส้มตำลำปลายมาศ
+description: Isan som tam, larb and grilled chicken by the town market.
+description_th: ส้มตำ ลาบ และไก่ย่างอีสาน ใกล้ตลาดในตัวเมือง
+source_url: ''
+category: restaurants
+tags:
+- sample
+- isan
+- local-favourite
+- budget
+featured: false
+status: approved
+sample: true
+city: lam-plai-mat
+area: town
+address: Lam Plai Mat Market Rd, Lam Plai Mat, Buriram 31130
+geo:
+  lat: 15.0285
+  lng: 102.842
+location:
+  address: Lam Plai Mat Market Rd, Lam Plai Mat, Buriram 31130
+  city: Lam Plai Mat
+  country: TH
+  latitude: 15.0285
+  longitude: 102.842
+phone: "+66800000301"
+hours:
+  mon:
+  - 10:00-20:00
+  tue:
+  - 10:00-20:00
+  wed:
+  - 10:00-20:00
+  thu:
+  - 10:00-20:00
+  fri:
+  - 10:00-20:00
+  sat:
+  - 10:00-20:00
+  sun:
+  - 10:00-20:00
+price_band: 1
+rating: 4.5
+rating_count: 41
+claimed: false
+amenities:
+  card-accepted: false
+  parking: true
+  walk-ins: true
+updated_by: import
+updated_at: "2026-09-18 11:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Isan som tam, larb and grilled chicken by the town market.
+
+
+  Som tam from ฿40, gai yang from ฿120.
+
+  '

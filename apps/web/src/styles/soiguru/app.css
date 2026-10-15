@@ -1,0 +1,428 @@
+/*
+ * SoiGuru app layout on top of the design's component classes (components.css).
+ * Only what a real page needs beyond the design previews: the page column, links styled
+ * as the design's buttons, the brand + city label, the live map, and small utilities.
+ * Prefix `sg-` for anything that is not in the design system.
+ */
+
+/* page column: the phone layout is the layout; 640px max on wider screens */
+html {
+    background: var(--surface-100);
+}
+.sg-page {
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--surface-100);
+    display: flex;
+    flex-direction: column;
+}
+.sg-page > main {
+    flex: 1;
+}
+@media (min-width: 641px) {
+    html {
+        background: var(--surface-200);
+    }
+    .sg-page {
+        border-inline: 1px solid var(--line);
+    }
+}
+.sg-page-wide {
+    max-width: none;
+    border-inline: 0;
+}
+
+/* top bar: fixed wordmark, city as a separate label */
+.tkg-topbar .tkg-brand {
+    color: var(--ink);
+}
+.tkg-brand-city {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--sea);
+    margin-left: calc(-1 * var(--space-2));
+}
+.tkg-brand-city::before {
+    content: '·';
+    color: var(--ink-muted);
+    margin-right: var(--space-2);
+}
+.sg-topbar-title {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.sg-topbar-title small {
+    display: block;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--ink-muted);
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* links rendered with the design's button classes */
+.tkg-nav a {
+    color: var(--ink-muted);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+.tkg-nav a .tkg-i {
+    width: 24px;
+    height: 24px;
+}
+.tkg-nav a.tkg-on {
+    color: var(--sea);
+}
+.sg-nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    padding-bottom: env(safe-area-inset-bottom);
+    height: auto;
+    min-height: 56px;
+}
+a.tkg-chip,
+a.tkg-cat {
+    text-decoration: none;
+}
+.tkg-cat {
+    color: var(--ink);
+}
+.tkg-bottombar {
+    z-index: 2;
+    padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
+}
+.tkg-section-h h2 {
+    min-width: 0;
+}
+
+/* header block on home screens */
+.sg-header {
+    background: var(--surface);
+    padding: var(--space-4) var(--space-4) 20px;
+    border-bottom: 1px solid var(--line);
+}
+.sg-header .tkg-display {
+    margin: 0 0 var(--space-3);
+    color: var(--sea-deep);
+}
+.sg-context {
+    margin-bottom: 2px;
+}
+
+/* cards */
+.tkg-card[hidden],
+[hidden] {
+    display: none !important;
+}
+.tkg-card .sg-photo-empty,
+.tkg-card .tkg-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+}
+.tkg-photo.sg-photo-empty .tkg-i svg {
+    position: static;
+}
+.sg-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.sg-regular {
+    font-weight: 400;
+}
+.sg-ml-1 {
+    margin-left: var(--space-1);
+}
+.sg-mt-2 {
+    margin-top: var(--space-2);
+}
+.sg-mb-3 {
+    margin-bottom: var(--space-3);
+}
+.sg-empty {
+    padding: var(--space-4);
+    color: var(--ink-muted);
+}
+.sg-boxed {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2) var(--space-4);
+}
+.sg-card-strip {
+    display: flex;
+    flex-direction: column;
+}
+
+/* listing page */
+.sg-title-block {
+    background: var(--surface);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--line);
+}
+.sg-title-block .tkg-title {
+    margin: 0;
+}
+.sg-contact-wrap {
+    padding: var(--space-3) 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+}
+.tkg-contact a {
+    text-decoration: none;
+}
+.sg-strip-photo {
+    flex: 2;
+}
+.sg-report {
+    padding: 20px var(--space-4) var(--space-6);
+}
+.sg-report .tkg-btn-ghost {
+    padding-left: 0;
+}
+
+/* search form */
+.sg-search-form .tkg-search:focus-within {
+    border-color: var(--sea);
+}
+.sg-search-wrap {
+    background: var(--surface);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--line);
+}
+
+/* filter bar: chips that wrap a native select */
+.sg-chip-select {
+    position: relative;
+}
+.sg-chip-select select {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+.sg-chip-select:focus-within {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.tkg-chip[aria-pressed='true'] {
+    background: var(--sea-tint);
+    border-color: var(--sea);
+    color: var(--sea);
+}
+
+/* maps */
+.sg-static-map {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: var(--surface-200);
+}
+.sg-static-map-tiles {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+}
+.sg-static-map-tiles img {
+    position: absolute;
+    max-width: none;
+}
+.tkg-map .sg-static-map-pin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30px;
+    height: 40px;
+    transform: translate(-50%, -94%);
+}
+.sg-map-attrib {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 6px;
+    font-size: 11px;
+    line-height: 16px;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    color: var(--ink-muted);
+}
+.sg-map-attrib a {
+    color: inherit;
+    text-decoration: underline;
+}
+.sg-results-map {
+    height: 150px;
+    border-bottom: 1px solid var(--line);
+    z-index: 0;
+}
+.sg-results-map .leaflet-container {
+    width: 100%;
+    height: 100%;
+    background: var(--surface-200);
+    font: inherit;
+}
+.sg-results-map .tkg-map-pill {
+    z-index: 500;
+}
+.sg-pin {
+    background: none;
+    border: 0;
+}
+.sg-pin svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+.sg-pin .tkg-m-pin,
+.sg-pin .tkg-m-pin-on {
+    stroke: var(--surface);
+    stroke-width: 1.5;
+}
+.sg-pin .tkg-m-pin {
+    fill: var(--ink);
+}
+.sg-pin .tkg-m-pin-on {
+    fill: var(--sea);
+}
+.sg-pin .tkg-m-pin-dot {
+    fill: var(--surface);
+}
+.sg-you {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--sun);
+    border: 2px solid var(--surface);
+    box-shadow: var(--shadow-card);
+}
+.sg-sheet {
+    position: absolute;
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+    z-index: 600;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sheet);
+    overflow: hidden;
+}
+.sg-sheet-grip {
+    height: 4px;
+    width: 36px;
+    border-radius: 999px;
+    background: var(--line-strong);
+    margin: var(--space-2) auto 0;
+}
+.sg-sheet .tkg-card {
+    border: 0;
+}
+.sg-sheet-actions {
+    display: flex;
+    gap: var(--space-2);
+    padding: 0 var(--space-4) var(--space-3);
+}
+.sg-sheet-actions > * {
+    flex: 1;
+}
+.sg-map-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 10px var(--space-4);
+}
+
+/* results: list mode (default) and map mode on phones */
+.sg-results[data-view='map'] .sg-results-map {
+    height: calc(100dvh - 56px - 61px - 56px);
+    min-height: 360px;
+}
+.sg-results[data-view='map'] .sg-results-list {
+    display: none;
+}
+.sg-results[data-view='list'] .sg-sheet,
+.sg-results[data-view='list'] .sg-map-footer {
+    display: none;
+}
+.sg-results[data-view='map'] .sg-show-map {
+    display: none;
+}
+
+/* wide screens: list on the left (420px), map fills the rest */
+@media (min-width: 960px) {
+    .sg-page-wide .sg-results {
+        display: grid;
+        grid-template-columns: 420px 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    .sg-page-wide .sg-results > .tkg-filterbar {
+        grid-column: 1 / -1;
+    }
+    .sg-page-wide .sg-results-list {
+        display: block !important;
+        grid-column: 1;
+        grid-row: 2;
+        border-right: 1px solid var(--line);
+    }
+    .sg-page-wide .sg-results-map {
+        grid-column: 2;
+        grid-row: 2;
+        position: sticky;
+        top: 56px;
+        height: calc(100vh - 56px) !important;
+    }
+    .sg-page-wide .sg-view-seg,
+    .sg-page-wide .sg-show-map,
+    .sg-page-wide .sg-map-footer {
+        display: none !important;
+    }
+    .sg-page-wide .sg-sheet {
+        display: none !important;
+    }
+    .sg-page-wide .sg-nav {
+        display: none;
+    }
+}
+
+/* a11y */
+.sg-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+html[data-lang='th'] body {
+    line-height: 24px;
+}
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+    }
+}

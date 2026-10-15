@@ -1,0 +1,61 @@
+name: Longtail Café
+name_th: ลองเทล คาเฟ่
+description: Breakfast, specialty coffee and smoothie bowls a short walk from Ao Nang beach.
+description_th: อาหารเช้า กาแฟพิเศษ และสมูทตี้โบวล์ เดินไม่ไกลจากหาดอ่าวนาง
+source_url: ''
+category: cafes
+tags:
+- sample
+- family-friendly
+featured: false
+status: approved
+sample: true
+city: krabi
+area: ao-nang
+address: 45 Moo 3, Ao Nang, Krabi 81180
+geo:
+  lat: 8.0342
+  lng: 98.8231
+location:
+  address: 45 Moo 3, Ao Nang, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0342
+  longitude: 98.8231
+phone: "+66800000103"
+whatsapp: "+66800000103"
+hours:
+  mon:
+  - 08:00-18:00
+  tue:
+  - 08:00-18:00
+  wed:
+  - 08:00-18:00
+  thu:
+  - 08:00-18:00
+  fri:
+  - 08:00-18:00
+  sat:
+  - 08:00-18:00
+  sun:
+  - 08:00-18:00
+price_band: 2
+rating: 4.7
+rating_count: 96
+claimed: false
+amenities:
+  wifi: true
+  air-con: true
+  vegetarian: true
+  card-accepted: true
+updated_by: import
+updated_at: "2026-09-01 08:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Breakfast, specialty coffee and smoothie bowls a short walk from Ao Nang beach.
+
+
+  All-day breakfast, Thai-roasted coffee and fresh fruit shakes.
+
+  '

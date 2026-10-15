@@ -1,0 +1,90 @@
+---
+/**
+ * ListingCard — one business in a list: what is it, is it open, how far, is it any good.
+ * The whole card is one link. `compact` is the 64px row used under the map and in
+ * "Nearby". The `data-*` attributes feed the browser scripts (status, distance, filters).
+ */
+import Icon from './Icon.astro';
+import ListingPhoto from './ListingPhoto.astro';
+import OpenStatus from './OpenStatus.astro';
+import { priceBand } from '../../lib/soiguru/format';
+import { formatDistance } from '../../lib/soiguru/geo';
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+    compact?: boolean;
+    /** Distance in metres computed at build time (e.g. "Nearby" on a listing page) */
+    distance?: number;
+    /** Hide the card initially (the browser reveals it) */
+    hidden?: boolean;
+}
+
+const { listing, compact, distance, hidden } = Astro.props;
+const price = priceBand(listing.price_band);
+const sub = [listing.category?.name, listing.area?.name].filter(Boolean).join(' · ');
+const subTh = [listing.category?.name_th, listing.area?.name_th ?? listing.area?.name].filter(Boolean).join(' · ');
+const boat = listing.area?.boat_only ? ' · boat' : '';
+---
+
+<a
+    class:list={['tkg-card', { 'tkg-card-compact': compact }]}
+    href={listing.url}
+    hidden={hidden}
+    data-listing={listing.slug}
+    data-lat={listing.geo?.lat}
+    data-lng={listing.geo?.lng}
+    data-rating={listing.rating ?? 0}
+    data-updated={listing.updated_at}
+    data-area={listing.area?.id}
+    data-category={listing.category?.id}
+    data-search={listing.searchText}
+    data-boat={listing.area?.boat_only ? '1' : undefined}
+>
+    <ListingPhoto listing={listing} size={compact ? 64 : 96} />
+    <div class="tkg-card-body">
+        <div class="tkg-card-title">
+            <span class="tkg-name" data-th={listing.name_th}>{listing.name}</span>
+            {
+                listing.claimed && (
+                    <span class="tkg-badge" title="Verified owner">
+                        <Icon name="shield" />
+                        <span class="sg-visually-hidden">Verified owner</span>
+                    </span>
+                )
+            }
+        </div>
+        {
+            !compact && (
+                <div class="tkg-card-sub">
+                    {listing.name_th && (
+                        <>
+                            <span data-th={listing.name}>{listing.name_th}</span>
+                            {' · '}
+                        </>
+                    )}
+                    <span data-th={subTh}>{sub}</span>
+                </div>
+            )
+        }
+        <OpenStatus listing={listing} />
+        <div class="tkg-card-meta">
+            {
+                listing.rating !== undefined && (
+                    <span class="tkg-rating">
+                        <Icon name="star" />
+                        {listing.rating.toFixed(1)}
+                        {!compact && listing.rating_count !== undefined && (
+                            <span class="tkg-muted sg-regular">({listing.rating_count})</span>
+                        )}
+                    </span>
+                )
+            }
+            <span class="tkg-dot" data-distance>
+                {distance !== undefined ? `${formatDistance(distance)}${boat}` : (listing.area?.name ?? listing.city.name)}
+            </span>
+            {price && <span class="tkg-dot">{price}</span>}
+            {listing.sample && <span class="tkg-badge tkg-badge-outline sg-ml-1">Sample</span>}
+        </div>
+    </div>
+</a>

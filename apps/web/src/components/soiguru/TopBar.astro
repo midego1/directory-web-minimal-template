@@ -1,0 +1,59 @@
+---
+/**
+ * TopBar — the 56px bar on every screen.
+ *
+ * Brand mode (no `back`): the fixed "SoiGuru" wordmark, the city as a separate label in
+ * `sea`, the language toggle and the city menu. Back mode: back button, a two-line title,
+ * and actions passed in the default slot.
+ */
+import Icon from './Icon.astro';
+import LanguageToggle from './LanguageToggle.astro';
+import type { City } from '../../lib/soiguru/data';
+
+interface Props {
+    /** City shown next to the wordmark (brand mode) */
+    city?: City;
+    /** Back link (back mode) */
+    back?: { href: string; label: string };
+    /** Title in back mode */
+    title?: string;
+    /** Thai title, swapped in when the UI language is Thai */
+    titleTh?: string;
+    /** Second line under the title */
+    subtitle?: string;
+    subtitleTh?: string;
+}
+
+const { city, back, title, titleTh, subtitle, subtitleTh } = Astro.props;
+---
+
+<header class="tkg-topbar">
+    {
+        back ? (
+            <>
+                <a class="tkg-iconbtn" href={back.href} aria-label={back.label}>
+                    <Icon name="chevron-left" />
+                </a>
+                <div class="sg-topbar-title">
+                    <span data-th={titleTh}>{title}</span>
+                    {subtitle && <small data-th={subtitleTh}>{subtitle}</small>}
+                </div>
+                <slot />
+            </>
+        ) : (
+            <>
+                <a class="tkg-brand" href="/">SoiGuru</a>
+                {city && (
+                    <a class="tkg-brand-city" href={`/${city.id}`} data-th={city.name_th}>
+                        {city.name}
+                    </a>
+                )}
+                <div class="tkg-spacer" />
+                <LanguageToggle />
+                <a class="tkg-iconbtn" href="/" aria-label="All cities">
+                    <Icon name="menu" />
+                </a>
+            </>
+        )
+    }
+</header>

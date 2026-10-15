@@ -2006,3 +2006,19 @@ applies between multi-option-cohort phases (no new audit-class inventions;
 light-touch verification ticks during pure-cron-tick runs; per-phase
 landing comes with its own `docs/log.md` entry per the plan).
 
+## Q30: SoiGuru design port follow-ups (2026-10-15)
+
+Context: `.specify/features/soiguru-design.md`. Open choices from the first pass, each with the
+default applied until the owner decides.
+
+1. **Where the SoiGuru screens live.** [DEFAULT] App-local in `apps/web/src/{lib,components,scripts}/soiguru/`
+   while the design settles; extract to a `@ever-works/plugin-local-business` package once the A/B
+   picks this template. Alternative: extract now.
+2. **Map tiles.** [DEFAULT] `tile.openstreetmap.org` with attribution (fine for low traffic under the
+   OSM tile policy). Alternatives: a self-hosted vector style (design README), MapTiler/Stadia with a key,
+   Apple MapKit JS (wanted later).
+3. **Thai UI.** [DEFAULT] Client-side swap of `[data-th]` texts, remembered on the device. Alternative:
+   a `/th/…` URL prefix with pre-rendered Thai pages (better for Thai search).
+4. **Claim and report targets.** [DEFAULT] `claim_url` / `contact_email` in `works.yml`; buttons hide
+   when unset. The claim flow itself lives in the Next.js app.
+

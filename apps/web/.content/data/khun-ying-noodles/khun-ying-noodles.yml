@@ -1,0 +1,61 @@
+name: Khun Ying Noodles
+name_th: ก๋วยเตี๋ยวคุณหญิง
+description: Boat noodles and khao man gai next to the Krabi Town night market.
+description_th: ก๋วยเตี๋ยวเรือและข้าวมันไก่ ข้างตลาดโต้รุ่งเมืองกระบี่
+source_url: ''
+category: restaurants
+tags:
+- sample
+- street-food
+- local-favourite
+- open-late
+- budget
+featured: false
+status: approved
+sample: true
+city: krabi
+area: krabi-town
+address: Khong Kha Rd, Krabi Town, Krabi 81000
+geo:
+  lat: 8.0635
+  lng: 98.9195
+location:
+  address: Khong Kha Rd, Krabi Town, Krabi 81000
+  city: Krabi
+  country: TH
+  latitude: 8.0635
+  longitude: 98.9195
+phone: "+66800000107"
+hours:
+  mon: []
+  tue:
+  - 17:00-23:00
+  wed:
+  - 17:00-23:00
+  thu:
+  - 17:00-23:00
+  fri:
+  - 17:00-23:00
+  sat:
+  - 17:00-23:00
+  sun:
+  - 17:00-23:00
+price_band: 1
+rating: 4.3
+rating_count: 187
+claimed: false
+amenities:
+  card-accepted: false
+  air-con: false
+  walk-ins: true
+updated_by: import
+updated_at: "2026-07-15 12:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Boat noodles and khao man gai next to the Krabi Town night market.
+
+
+  Bowls from ฿50. Cash only.
+
+  '

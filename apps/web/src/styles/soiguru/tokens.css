@@ -1,0 +1,64 @@
+/* SoiGuru design tokens, generated from the design system's tokens.json (TheKrabiGuide, renamed SoiGuru). */
+
+:root {
+  color-scheme: light dark;
+  --surface: #ffffff;
+  --surface-100: #f4f5f2;
+  --surface-200: #e9ebe6;
+  --ink: #14201f;
+  --ink-muted: #5a6665;
+  --line: #dde2df;
+  --line-strong: #9aa6a3;
+  --sea: #0a6b73;
+  --sea-deep: #064a50;
+  --sea-tint: #e2f1f2;
+  --on-sea: #ffffff;
+  --sun: #f2a33a;
+  --sun-tint: #fdf0dc;
+  --open: #137a5b;
+  --closed: #b3261e;
+  --soon: #9a5b00;
+  --focus: var(--sea);
+  --overlay: #14201fb3;
+  --line-brand: #06c755;
+  --whatsapp-brand: #25d366;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-11: 44px;
+  --space-14: 56px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px #14201f14;
+  --shadow-sheet: 0 -8px 24px #14201f1f;
+  --font-sans: "IBM Plex Sans", "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-thai: "IBM Plex Sans Thai", "Noto Sans Thai", "IBM Plex Sans", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #141b1a;
+    --surface-100: #0d1211;
+    --surface-200: #1f2826;
+    --ink: #eef3f1;
+    --ink-muted: #9fb0ac;
+    --line: #2a3533;
+    --line-strong: #60706c;
+    --sea: #5fc9cf;
+    --sea-deep: #8adde1;
+    --sea-tint: #163234;
+    --on-sea: #0d1211;
+    --sun-tint: #3a2a12;
+    --open: #5fd3a3;
+    --closed: #ff8a80;
+    --soon: #f4b860;
+    --overlay: #000000b3;
+    --shadow-card: 0 1px 2px #00000066;
+    --shadow-sheet: 0 -8px 24px #00000099;
+  }
+}

@@ -64,6 +64,24 @@ describe('loadCategories', () => {
         });
     });
 
+    it('should pass extra keys through and still drop malformed known keys', async () => {
+        const adapter = createMockAdapter({
+            exists: vi.fn().mockResolvedValue(true),
+            readFile: vi.fn().mockResolvedValue(
+                '- id: nail-salons\n  name: Nail salons\n  name_th: ร้านทำเล็บ\n  icon: star\n  description: 42\n'
+            ),
+        });
+
+        const categories = await loadCategories(adapter);
+
+        expect(categories[0]).toEqual({
+            id: 'nail-salons',
+            name: 'Nail salons',
+            name_th: 'ร้านทำเล็บ',
+            icon: 'star',
+        });
+    });
+
     it('should try fallback path categories/categories.yml', async () => {
         const adapter = createMockAdapter({
             exists: vi.fn().mockImplementation((path: string) => {

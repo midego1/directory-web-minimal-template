@@ -1,0 +1,72 @@
+---
+/**
+ * SoiGuruLayout — document shell for the SoiGuru screens (landing, city home, results,
+ * listing). Loads the design's tokens and component CSS, IBM Plex Sans (+ Thai) with
+ * `font-display: swap`, SEO meta from plugin-seo, optional JSON-LD, and the small page
+ * script that computes open status, distances and the language swap in the browser.
+ *
+ * Phone first: one 640px column; `wide` lets a screen (results) use the full width.
+ */
+import { generateMetaTags } from '@ever-works/plugin-seo';
+import type { SiteConfig } from '@ever-works/core';
+import { jsonForScript } from '../lib/soiguru/format';
+import '../styles/soiguru/tokens.css';
+import '../styles/soiguru/components.css';
+import '../styles/soiguru/app.css';
+
+interface Props {
+    /** Full document title */
+    title: string;
+    description: string;
+    config: SiteConfig;
+    /** Canonical path, e.g. `/krabi/nail-salons` */
+    path: string;
+    /** JSON-LD objects for the head */
+    jsonLd?: Record<string, unknown>[];
+    /** City time zone for the status script (default Asia/Bangkok) */
+    timeZone?: string;
+    /** Use the full width (results list + map) */
+    wide?: boolean;
+    /** Keep the page out of search results (e.g. the search page) */
+    noindex?: boolean;
+}
+
+const { title, description, config, path, jsonLd = [], timeZone = 'Asia/Bangkok', wide = false, noindex = false } = Astro.props;
+const siteUrl = (Astro.site?.href ?? 'https://soiguru.com/').replace(/\/$/, '');
+const canonical = `${siteUrl}${path}`;
+const metaTags = generateMetaTags({ title, description, url: canonical, type: 'website' }, {});
+---
+
+<!doctype html>
+<html lang="en" data-lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#0a6b73" />
+        <title>{title}</title>
+        {
+            metaTags.map((tag) =>
+                tag.key === 'property' ? <meta property={tag.value} content={tag.content} /> : <meta name={tag.value} content={tag.content} />,
+            )
+        }
+        {noindex && <meta name="robots" content="noindex" />}
+        <link rel="canonical" href={canonical} />
+        {config.logo?.favicon && <link rel="icon" href={config.logo.favicon} />}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
+        />
+        {jsonLd.map((ld) => <script is:inline type="application/ld+json" set:html={jsonForScript(ld)} />)}
+        <slot name="head" />
+    </head>
+    <body data-tz={timeZone}>
+        <div class:list={['sg-page', { 'sg-page-wide': wide }]}>
+            <slot />
+        </div>
+        <script>
+            import '../scripts/soiguru/page';
+        </script>
+    </body>
+</html>

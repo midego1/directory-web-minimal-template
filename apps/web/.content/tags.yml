@@ -1,0 +1,26 @@
+- id: sample
+  name: Sample listing
+- id: open-late
+  name: Open late
+- id: family-friendly
+  name: Family friendly
+- id: local-favourite
+  name: Local favourite
+- id: beachfront
+  name: Beachfront
+- id: budget
+  name: Budget
+- id: seafood
+  name: Seafood
+- id: street-food
+  name: Street food
+- id: island-hopping
+  name: Island hopping
+- id: monthly-rental
+  name: Monthly rental
+- id: spa
+  name: Spa
+- id: northern-thai
+  name: Northern Thai
+- id: isan
+  name: Isan food

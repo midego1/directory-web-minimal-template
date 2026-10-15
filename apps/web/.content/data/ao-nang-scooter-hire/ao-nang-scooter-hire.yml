@@ -1,0 +1,62 @@
+name: Ao Nang Scooter Hire
+name_th: อ่าวนาง เช่ามอเตอร์ไซค์
+description: Automatic scooters by the day, week or month, with helmets and a phone holder.
+description_th: เช่ารถมอเตอร์ไซค์ออโต้ รายวัน รายสัปดาห์ หรือรายเดือน พร้อมหมวกกันน็อก
+source_url: ''
+category: scooter-rental
+tags:
+- sample
+- monthly-rental
+- budget
+featured: false
+status: approved
+sample: true
+city: krabi
+area: ao-nang
+address: 12 Moo 2, Ao Nang Rd, Ao Nang, Krabi 81180
+geo:
+  lat: 8.0315
+  lng: 98.827
+location:
+  address: 12 Moo 2, Ao Nang Rd, Ao Nang, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0315
+  longitude: 98.827
+phone: "+66800000104"
+line_id: '@sample-aonangscooter'
+whatsapp: "+66800000104"
+hours:
+  mon:
+  - 08:00-20:00
+  tue:
+  - 08:00-20:00
+  wed:
+  - 08:00-20:00
+  thu:
+  - 08:00-20:00
+  fri:
+  - 08:00-20:00
+  sat:
+  - 08:00-20:00
+  sun:
+  - 08:00-20:00
+price_band: 1
+rating: 4.4
+rating_count: 78
+claimed: true
+amenities:
+  helmet-included: true
+  english-spoken: true
+  card-accepted: false
+updated_by: owner
+updated_at: "2026-10-10 11:15"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Automatic scooters by the day, week or month, with helmets and a phone holder.
+
+
+  Click 125 from ฿250 / day, ฿3,500 / month. Passport copy and deposit required.
+
+  '

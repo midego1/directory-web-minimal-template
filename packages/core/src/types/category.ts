@@ -3,7 +3,12 @@
  * Parsed from `.content/categories.yml` or `.content/categories/categories.yml`.
  */
 
-/** A category definition */
+/**
+ * A category definition.
+ *
+ * The loader also keeps any additional YAML keys (e.g. `name_th`, `icon`) on the object at
+ * runtime; they are not part of this type, so read them as `Record<string, unknown>`.
+ */
 export interface CategoryData {
     /** Unique identifier (lowercase, kebab-case) */
     id: string;

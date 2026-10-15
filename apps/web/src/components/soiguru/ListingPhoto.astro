@@ -1,0 +1,33 @@
+---
+/**
+ * ListingPhoto — the listing's first photo, or (no photo) a `surface-200` placeholder
+ * with the category icon in `ink-muted`. Never a stock image.
+ */
+import Icon from './Icon.astro';
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+    /** Index into `listing.images` */
+    index?: number;
+    /** Rendered size in px, for the image's width/height hints */
+    size?: number;
+    /** `eager` for the photo strip above the fold */
+    loading?: 'lazy' | 'eager';
+}
+
+const { listing, index = 0, size = 96, loading = 'lazy' } = Astro.props;
+const src = listing.images[index];
+---
+
+{
+    src ? (
+        <div class="tkg-photo">
+            <img class="sg-photo-img" src={src} alt="" width={size} height={size} loading={loading} decoding="async" />
+        </div>
+    ) : (
+        <div class="tkg-photo sg-photo-empty" aria-hidden="true">
+            <Icon name={listing.category?.icon ?? 'image'} class="tkg-i-24" />
+        </div>
+    )
+}

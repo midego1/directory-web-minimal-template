@@ -1,0 +1,62 @@
+name: Baan Sabai Thai Massage
+name_th: บ้านสบาย นวดแผนไทย
+description: Traditional Thai, foot and oil massage in a quiet shophouse off the beach road.
+description_th: นวดแผนไทย นวดเท้า และนวดน้ำมัน ในตึกแถวเงียบๆ ใกล้ถนนเลียบหาด
+source_url: ''
+category: massage
+tags:
+- sample
+- open-late
+- spa
+featured: true
+status: approved
+sample: true
+city: krabi
+area: ao-nang
+address: 88 Moo 2, Ao Nang Rd, Ao Nang, Krabi 81180
+geo:
+  lat: 8.0336
+  lng: 98.8255
+location:
+  address: 88 Moo 2, Ao Nang Rd, Ao Nang, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0336
+  longitude: 98.8255
+phone: "+66800000102"
+line_id: '@sample-baansabai'
+hours:
+  mon:
+  - 10:00-22:00
+  tue:
+  - 10:00-22:00
+  wed:
+  - 10:00-22:00
+  thu:
+  - 10:00-22:00
+  fri:
+  - 10:00-22:00
+  sat:
+  - 10:00-22:00
+  sun:
+  - 10:00-22:00
+price_band: 1
+rating: 4.6
+rating_count: 154
+claimed: true
+amenities:
+  air-con: true
+  walk-ins: true
+  english-spoken: true
+  card-accepted: false
+updated_by: owner
+updated_at: "2026-10-08 14:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Traditional Thai, foot and oil massage in a quiet shophouse off the beach road.
+
+
+  One-hour Thai massage from ฿300, foot massage from ฿250. Hot herbal compress on request.
+
+  '

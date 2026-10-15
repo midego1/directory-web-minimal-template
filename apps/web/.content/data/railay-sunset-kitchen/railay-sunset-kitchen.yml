@@ -1,0 +1,68 @@
+name: Railay Sunset Kitchen
+name_th: ไร่เลย์ ซันเซ็ท คิทเช่น
+description: Thai and seafood on Railay West with sunset tables on the sand.
+description_th: อาหารไทยและอาหารทะเลที่ไร่เลย์ฝั่งตะวันตก มีโต๊ะริมหาดชมพระอาทิตย์ตก
+source_url: ''
+category: restaurants
+tags:
+- sample
+- seafood
+- beachfront
+featured: false
+status: approved
+sample: true
+city: krabi
+area: railay
+address: Railay West Walking Street, Railay, Krabi 81180
+geo:
+  lat: 8.0118
+  lng: 98.8366
+location:
+  address: Railay West Walking Street, Railay, Krabi 81180
+  city: Krabi
+  country: TH
+  latitude: 8.0118
+  longitude: 98.8366
+phone: "+66800000105"
+hours:
+  mon:
+  - 11:00-15:00
+  - 17:00-22:00
+  tue:
+  - 11:00-15:00
+  - 17:00-22:00
+  wed:
+  - 11:00-15:00
+  - 17:00-22:00
+  thu:
+  - 11:00-15:00
+  - 17:00-22:00
+  fri:
+  - 11:00-15:00
+  - 17:00-22:00
+  sat:
+  - 11:00-15:00
+  - 17:00-22:00
+  sun:
+  - 11:00-15:00
+  - 17:00-22:00
+price_band: 3
+rating: 4.5
+rating_count: 301
+claimed: false
+amenities:
+  sea-view: true
+  english-spoken: true
+  card-accepted: true
+  vegetarian: true
+updated_by: import
+updated_at: "2026-08-20 10:00"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Thai and seafood on Railay West with sunset tables on the sand.
+
+
+  Grilled fish of the day, massaman curry and cocktails. Reachable by longtail boat only.
+
+  '

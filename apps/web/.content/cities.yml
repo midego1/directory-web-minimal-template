@@ -1,0 +1,85 @@
+- id: krabi
+  name: Krabi
+  name_th: กระบี่
+  province: Krabi
+  geo:
+    lat: 8.0863
+    lng: 98.9063
+  timezone: Asia/Bangkok
+  default_area: ao-nang
+  areas:
+  - id: ao-nang
+    name: Ao Nang
+    name_th: อ่าวนาง
+    geo:
+      lat: 8.0321
+      lng: 98.8227
+  - id: railay
+    name: Railay
+    name_th: ไร่เลย์
+    geo:
+      lat: 8.011
+      lng: 98.838
+    boat_only: true
+  - id: krabi-town
+    name: Krabi Town
+    name_th: เมืองกระบี่
+    geo:
+      lat: 8.063
+      lng: 98.918
+  - id: klong-muang
+    name: Klong Muang
+    name_th: คลองม่วง
+    geo:
+      lat: 8.056
+      lng: 98.764
+- id: chiang-mai
+  name: Chiang Mai
+  name_th: เชียงใหม่
+  province: Chiang Mai
+  geo:
+    lat: 18.7883
+    lng: 98.9853
+  timezone: Asia/Bangkok
+  default_area: old-city
+  areas:
+  - id: old-city
+    name: Old City
+    name_th: คูเมือง
+    geo:
+      lat: 18.7877
+      lng: 98.9931
+  - id: nimman
+    name: Nimman
+    name_th: นิมมาน
+    geo:
+      lat: 18.799
+      lng: 98.968
+  - id: night-bazaar
+    name: Night Bazaar
+    name_th: ไนท์บาซาร์
+    geo:
+      lat: 18.786
+      lng: 99.0
+  - id: santitham
+    name: Santitham
+    name_th: สันติธรรม
+    geo:
+      lat: 18.802
+      lng: 98.983
+- id: lam-plai-mat
+  name: Lam Plai Mat
+  name_th: ลำปลายมาศ
+  province: Buriram
+  geo:
+    lat: 15.028
+    lng: 102.841
+  timezone: Asia/Bangkok
+  default_area: town
+  areas:
+  - id: town
+    name: Town centre
+    name_th: ตัวเมือง
+    geo:
+      lat: 15.028
+      lng: 102.841

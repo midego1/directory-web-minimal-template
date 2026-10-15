@@ -1,0 +1,45 @@
+- id: air-con
+  name: Air-con
+  name_th: แอร์
+- id: card-accepted
+  name: Card accepted
+  name_th: รับบัตร
+- id: english-spoken
+  name: English spoken
+  name_th: พูดภาษาอังกฤษได้
+- id: walk-ins
+  name: Walk-ins
+  name_th: ไม่ต้องจอง
+- id: parking
+  name: Parking
+  name_th: ที่จอดรถ
+- id: wifi
+  name: Wi-Fi
+  name_th: Wi-Fi
+- id: sea-view
+  name: Sea view
+  name_th: วิวทะเล
+- id: vegetarian
+  name: Vegetarian options
+  name_th: มีอาหารมังสวิรัติ
+- id: halal
+  name: Halal
+  name_th: ฮาลาล
+- id: gel-acrylic
+  name: Gel & acrylic
+  name_th: เจลและอะคริลิก
+- id: hotel-pickup
+  name: Hotel pickup
+  name_th: รับส่งที่โรงแรม
+- id: helmet-included
+  name: Helmet included
+  name_th: มีหมวกกันน็อก
+- id: padi
+  name: PADI courses
+  name_th: คอร์ส PADI
+- id: pool
+  name: Pool
+  name_th: สระว่ายน้ำ
+- id: breakfast
+  name: Breakfast
+  name_th: อาหารเช้า

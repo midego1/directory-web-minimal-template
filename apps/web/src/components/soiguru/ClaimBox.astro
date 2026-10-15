@@ -1,0 +1,40 @@
+---
+/**
+ * ClaimBox — the call-to-action on unclaimed listings: `sun-tint`, `sun` border and the
+ * one `sun` button on the page. Followed by the blame-free "hours may be out of date" note.
+ * Renders nothing on claimed listings.
+ */
+import Icon from './Icon.astro';
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+    href?: string;
+}
+
+const { listing, href } = Astro.props;
+---
+
+{
+    !listing.claimed && (
+        <div class="tkg-section">
+            {href && (
+                <div class="tkg-claim">
+                    <h3>Is this your business?</h3>
+                    <p>
+                        Claim it to edit your hours, photos and LINE, and get a Verified owner badge.{' '}
+                        <span class="tkg-claim-price">฿100 / month</span> or ฿1,000 / year.
+                    </p>
+                    <a class="tkg-btn tkg-btn-sun" href={href}>
+                        <Icon name="shield" />
+                        Claim this listing
+                    </a>
+                </div>
+            )}
+            <div class:list={['tkg-info', { 'sg-mt-2': href }]}>
+                <Icon name="info" />
+                <span>Hours may be out of date: this listing isn't managed by its owner yet.</span>
+            </div>
+        </div>
+    )
+}

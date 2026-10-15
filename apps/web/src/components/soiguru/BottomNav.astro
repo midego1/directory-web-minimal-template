@@ -1,0 +1,33 @@
+---
+/**
+ * BottomNav — Home, Search, Owner. "Saved" from the design needs accounts or device
+ * storage and is left for the Next.js app; Owner goes to the claim flow.
+ */
+import Icon from './Icon.astro';
+import type { City } from '../../lib/soiguru/data';
+
+interface Props {
+    city: City;
+    active: 'home' | 'search';
+    /** Claim flow URL; the Owner tab is omitted without one */
+    ownerHref?: string;
+}
+
+const { city, active, ownerHref } = Astro.props;
+---
+
+<nav class="tkg-nav sg-nav" aria-label="Main" style={ownerHref ? undefined : 'grid-template-columns: repeat(2, 1fr)'}>
+    <a href={`/${city.id}`} class:list={{ 'tkg-on': active === 'home' }} aria-current={active === 'home' ? 'page' : undefined}>
+        <Icon name="home" /><span data-th="หน้าแรก">Home</span>
+    </a>
+    <a href={`/${city.id}/search`} class:list={{ 'tkg-on': active === 'search' }} aria-current={active === 'search' ? 'page' : undefined}>
+        <Icon name="search" /><span data-th="ค้นหา">Search</span>
+    </a>
+    {
+        ownerHref && (
+            <a href={ownerHref}>
+                <Icon name="user" /><span data-th="เจ้าของร้าน">Owner</span>
+            </a>
+        )
+    }
+</nav>

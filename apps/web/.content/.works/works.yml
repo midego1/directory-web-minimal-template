@@ -1,0 +1,43 @@
+company_name: SoiGuru
+name: SoiGuru
+item_name: Place
+items_name: Places
+copyright_year: 2026
+company_website: https://soiguru.com
+app_url: https://soiguru.com
+site_url: https://soiguru.com
+content_table: false
+pagination:
+  type: standard
+  itemsPerPage: 20
+auth:
+  credentials: true
+settings:
+  categories_enabled: true
+  companies_enabled: false
+  tags_enabled: true
+  surveys_enabled: false
+  comparisons_enabled: false
+  header:
+    submit_enabled: false
+    pricing_enabled: false
+    layout_enabled: false
+    language_enabled: true
+    theme_enabled: false
+    theme_default: light
+  homepage:
+    hero_enabled: false
+    search_enabled: true
+    default_sort: popularity
+  footer:
+    subscribe_enabled: false
+    version_enabled: false
+    theme_selector_enabled: false
+custom_footer:
+  - label: footer.TERMS_OF_SERVICE
+    path: /pages/terms-of-service
+  - label: footer.PRIVACY_POLICY
+    path: /pages/privacy-policy
+# SoiGuru (Astro): where "Claim this listing" and the Owner tab go, and where
+# "Report wrong info" e-mails are sent. Both optional; the buttons hide without them.
+claim_url: https://soiguru.midego.net/claim

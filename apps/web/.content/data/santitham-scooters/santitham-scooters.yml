@@ -1,0 +1,60 @@
+name: Santitham Scooters
+name_th: สันติธรรม สกู๊ตเตอร์
+description: Monthly scooter rental for long-stay visitors, with free servicing.
+description_th: เช่ามอเตอร์ไซค์รายเดือนสำหรับผู้พักระยะยาว ซ่อมบำรุงฟรี
+source_url: ''
+category: scooter-rental
+tags:
+- sample
+- monthly-rental
+- budget
+featured: false
+status: approved
+sample: true
+city: chiang-mai
+area: santitham
+address: Santitham Rd, Chang Phueak, Chiang Mai 50300
+geo:
+  lat: 18.8025
+  lng: 98.9835
+location:
+  address: Santitham Rd, Chang Phueak, Chiang Mai 50300
+  city: Chiang Mai
+  country: TH
+  latitude: 18.8025
+  longitude: 98.9835
+phone: "+66800000204"
+line_id: '@sample-santithamscoot'
+whatsapp: "+66800000204"
+hours:
+  mon:
+  - 09:00-18:00
+  tue:
+  - 09:00-18:00
+  wed:
+  - 09:00-18:00
+  thu:
+  - 09:00-18:00
+  fri:
+  - 09:00-18:00
+  sat:
+  - 09:00-18:00
+  sun: []
+price_band: 1
+rating: 4.6
+rating_count: 57
+claimed: true
+amenities:
+  helmet-included: true
+  english-spoken: true
+updated_by: owner
+updated_at: "2026-10-05 10:30"
+markdown: '> **SAMPLE listing.** This business is invented for development and design review. Do not publish.
+
+
+  Monthly scooter rental for long-stay visitors, with free servicing.
+
+
+  Scoopy from ฿2,800 / month with free oil changes.
+
+  '

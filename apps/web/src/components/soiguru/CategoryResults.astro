@@ -1,0 +1,133 @@
+---
+/**
+ * CategoryResults — results for a category, an area, or a search, in two modes on one
+ * URL: List (default) and Map (OpenStreetMap via Leaflet, loaded only on this screen).
+ *
+ * Filters change the list in place and the URL (`?area=ao-nang&open=1&sort=nearest&view=map`)
+ * so results can be shared. Closed places sit behind one "Show N closed now" button rather
+ * than mixed in grey. "Show more" at 20. All filtering runs in the browser
+ * (`scripts/soiguru/results.ts`) over the listings rendered here.
+ *
+ * On wide screens the list takes the left 420px and the map fills the rest.
+ */
+import Icon from './Icon.astro';
+import ListingCard from './ListingCard.astro';
+import BottomNav from './BottomNav.astro';
+import { directionsUrl } from '../../lib/soiguru/geo';
+import { jsonForScript } from '../../lib/soiguru/format';
+import type { Area, City, Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    city: City;
+    listings: Listing[];
+    /** What the results are: "nail salons", "places" — for the count heading */
+    noun: string;
+    /** Area preselected by the URL path (area results) */
+    area?: Area;
+    /** Hide the area filter (area results already are one area) */
+    lockArea?: boolean;
+    ownerHref?: string;
+    /** Search page: filter by `?q=` */
+    search?: boolean;
+}
+
+const { city, listings, noun, area, lockArea = false, ownerHref, search = false } = Astro.props;
+const pins = listings
+    .filter((l) => l.geo)
+    .map((l) => ({
+        slug: l.slug,
+        name: l.name,
+        lat: l.geo!.lat,
+        lng: l.geo!.lng,
+        url: l.url,
+        directions: directionsUrl(l.geo!),
+    }));
+const center = area?.geo ?? city.geo ?? pins[0] ?? { lat: 13.75, lng: 100.5 };
+---
+
+<div
+    class="sg-results"
+    data-view="list"
+    data-results-root
+    data-noun={noun}
+    data-where={area?.name ?? city.name}
+    data-default-area={lockArea ? undefined : (area?.id ?? '')}
+    data-search={search ? '1' : undefined}
+>
+    <div class="tkg-filterbar" role="toolbar" aria-label="Filters">
+        <div class="tkg-seg sg-view-seg" role="group" aria-label="View">
+            <button type="button" class="tkg-on" data-view-set="list" aria-pressed="true"><Icon name="list" />List</button>
+            <button type="button" data-view-set="map" aria-pressed="false"><Icon name="map" />Map</button>
+        </div>
+        <button type="button" class="tkg-chip" data-filter-open aria-pressed="false">
+            <Icon name="clock" /><span data-th="เปิดอยู่ตอนนี้">Open now</span>
+        </button>
+        {
+            !lockArea && city.areas.length > 1 && (
+                <label class="tkg-chip sg-chip-select" data-area-chip>
+                    <span data-area-label>{area?.name ?? 'All areas'}</span>
+                    <Icon name="chevron-down" />
+                    <select data-filter-area aria-label="Area">
+                        <option value="">All areas</option>
+                        {city.areas.map((a) => (
+                            <option value={a.id} selected={a.id === area?.id}>
+                                {a.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            )
+        }
+        <label class="tkg-chip sg-chip-select">
+            <span data-sort-label>Top rated</span>
+            <Icon name="chevron-down" />
+            <select data-filter-sort aria-label="Sort">
+                <option value="rating">Top rated</option>
+                <option value="nearest">Nearest</option>
+                <option value="updated">Recently updated</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="tkg-map sg-results-map" data-map data-center={`${center.lat},${center.lng}`}>
+        <button type="button" class="tkg-map-pill sg-show-map" data-view-set="map"><Icon name="map" />Show map</button>
+        <div class="sg-sheet" data-sheet hidden>
+            <div class="sg-sheet-grip"></div>
+            <div data-sheet-card></div>
+            <div class="sg-sheet-actions">
+                <a class="tkg-btn tkg-btn-sm" data-sheet-directions target="_blank" rel="noopener"><Icon name="navigation" />Directions</a>
+                <a class="tkg-btn tkg-btn-secondary tkg-btn-sm" data-sheet-view>View listing</a>
+            </div>
+        </div>
+    </div>
+    <div class="sg-map-footer tkg-small tkg-muted">
+        <span data-count-short></span> · map data ©{' '}
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
+    </div>
+
+    <div class="sg-results-list">
+        <div class="tkg-section" style="padding-top:16px">
+            <div class="tkg-section-h">
+                <h2>
+                    <span data-count-open>{listings.length} {noun}</span>
+                    <small data-count-total>in {area?.name ?? city.name}</small>
+                </h2>
+            </div>
+            <div class="tkg-list" data-results>
+                {listings.map((listing) => <ListingCard listing={listing} />)}
+            </div>
+            <p class="sg-empty" data-results-empty hidden={listings.length > 0}>
+                {listings.length === 0 ? `Nothing listed here yet.` : `No places match these filters.`}
+            </p>
+            <div class="tkg-pad" style="padding-top:12px;padding-bottom:16px;display:flex;flex-direction:column;gap:8px">
+                <button type="button" class="tkg-btn tkg-btn-secondary tkg-btn-block" data-show-more hidden>Show more</button>
+                <button type="button" class="tkg-btn tkg-btn-secondary tkg-btn-block" data-show-closed hidden></button>
+            </div>
+        </div>
+    </div>
+</div>
+<BottomNav city={city} active="search" ownerHref={ownerHref} />
+<script is:inline type="application/json" data-pins set:html={jsonForScript(pins)} />
+<script>
+    import '../../scripts/soiguru/results';
+</script>

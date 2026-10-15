@@ -1,0 +1,18 @@
+---
+/**
+ * Icon — one stroke icon from the SoiGuru set, inline SVG in an `<i class="tkg-i">`.
+ * Sizes come from the design's classes: default 20px, `tkg-i-16`, `tkg-i-24`.
+ */
+import { iconSvg } from '../../lib/soiguru/icons';
+
+interface Props {
+    /** Icon name (see `lib/soiguru/icons.ts`) */
+    name: string;
+    /** Extra classes, e.g. `tkg-i-16` */
+    class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<i class:list={['tkg-i', className]} set:html={iconSvg(name)} />

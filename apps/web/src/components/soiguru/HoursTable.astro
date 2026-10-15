@@ -1,0 +1,65 @@
+---
+/**
+ * HoursTable — the week as a two-column table, consecutive identical days merged
+ * ("Mon–Wed"), 24-hour clock, tabular numerals. The browser marks today's row
+ * (`body-strong`, day in `sea`, "· today"); today is not known at build time.
+ */
+import { hoursRows } from '../../lib/soiguru/hours';
+import type { Listing } from '../../lib/soiguru/data';
+
+interface Props {
+    listing: Listing;
+}
+
+const { listing } = Astro.props;
+const rows = listing.hours ? hoursRows(listing.hours) : [];
+---
+
+{
+    rows.length > 0 && (
+        <div class="tkg-section">
+            <div class="tkg-section-h">
+                <h2>Hours · เวลาเปิด-ปิด</h2>
+            </div>
+            {listing.hours_note && (
+                <div class="tkg-info sg-mb-3">
+                    <span>{listing.hours_note}</span>
+                </div>
+            )}
+            <div class="tkg-pad">
+                <div class="sg-boxed">
+                    <table class="tkg-hours" data-hours-table>
+                        <tbody>
+                            {rows.map((row) => (
+                                <tr data-days={row.days.join(' ')}>
+                                    <td>
+                                        <span data-th={row.labelTh}>{row.label}</span>
+                                        <span class="sg-today-label" hidden>
+                                            {' '}· today
+                                        </span>
+                                    </td>
+                                    {row.closed ? (
+                                        <td class="tkg-closed-day" data-th="ปิด">
+                                            Closed
+                                        </td>
+                                    ) : row.allDay ? (
+                                        <td data-th="24 ชั่วโมง">Open 24 hours</td>
+                                    ) : (
+                                        <td>
+                                            {row.times.map((t, i) => (
+                                                <>
+                                                    {i > 0 && <br />}
+                                                    {t}
+                                                </>
+                                            ))}
+                                        </td>
+                                    )}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    )
+}

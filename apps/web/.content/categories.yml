@@ -1,0 +1,50 @@
+- id: restaurants
+  name: Restaurants
+  name_th: ร้านอาหาร
+  icon: home
+  description: Thai kitchens, seafood, street food and international restaurants.
+  priority: 8
+- id: cafes
+  name: Cafés
+  name_th: คาเฟ่
+  icon: cash
+  description: Coffee, breakfast and bakeries.
+  priority: 7
+- id: massage
+  name: Massage
+  name_th: นวด
+  icon: heart
+  description: Thai massage, foot massage and spas.
+  priority: 6
+- id: tours
+  name: Tours
+  name_th: ทัวร์
+  icon: map
+  description: Island hopping, longtail boats, day trips and guides.
+  priority: 5
+- id: scooter-rental
+  name: Scooter rental
+  short_name: Scooters
+  name_th: เช่ามอเตอร์ไซค์
+  icon: bolt
+  description: Scooter and motorbike hire by the day or month.
+  priority: 4
+- id: nail-salons
+  name: Nail salons
+  short_name: Nails
+  name_th: ร้านทำเล็บ
+  icon: star
+  description: Manicure, pedicure, gel and acrylic.
+  priority: 3
+- id: dive-shops
+  name: Dive shops
+  name_th: ร้านดำน้ำ
+  icon: globe
+  description: Dive courses, fun dives and snorkel trips.
+  priority: 2
+- id: hotels
+  name: Hotels
+  name_th: โรงแรม
+  icon: calendar
+  description: Hotels, resorts and guesthouses.
+  priority: 1
