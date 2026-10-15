@@ -51,11 +51,19 @@ function main(): void {
         cloneUrl = repo.replace('https://', `https://x-access-token:${token}@`);
     }
 
-    console.log(`[clone-content] Cloning ${repo} (default branch)...`);
+    // Optional branch of the content repo (e.g. a `data` branch of the website repo).
+    const branch = process.env.DATA_REPOSITORY_BRANCH?.trim();
+    if (branch && !/^[\w./-]+$/.test(branch)) {
+        console.error(`[clone-content] Invalid DATA_REPOSITORY_BRANCH: ${branch}`);
+        process.exit(1);
+    }
+    const branchArg = branch ? ` --branch "${branch}" --single-branch` : '';
+
+    console.log(`[clone-content] Cloning ${repo} (${branch ? `branch ${branch}` : 'default branch'})...`);
 
     try {
         execSync(
-            `git clone --depth 1 "${cloneUrl}" "${CONTENT_DIR}"`,
+            `git clone --depth 1${branchArg} "${cloneUrl}" "${CONTENT_DIR}"`,
             { stdio: 'inherit' },
         );
         console.log('[clone-content] Clone complete.');

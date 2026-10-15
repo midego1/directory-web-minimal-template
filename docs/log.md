@@ -3,6 +3,10 @@ title: "Change Log"
 sidebar_label: "Change Log"
 ---
 
+## 2026-10-15 — Optional DATA_REPOSITORY_BRANCH for the content clone
+
+New optional env var `DATA_REPOSITORY_BRANCH`. When set, `apps/web/scripts/clone-content.ts` clones that branch (`git clone --branch <b> --single-branch`) and `resolveAdapterConfig` in `@ever-works/adapters` passes it to the git adapter as `branch`, which already supported it. This lets the content live on a branch of the website repo (SoiGuru keeps it on an orphan `data` branch of `midego1/SoiGuru.com`). Unset keeps the old behaviour (remote default branch). Branch names are validated against `[\w./-]+` before reaching the shell.
+
 ## 2026-05-19 — Pin Vercel framework to "astro" via apps/web/vercel.json + workflow verification
 
 Live deploy failed on a custom-template Work with:
