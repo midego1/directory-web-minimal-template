@@ -68,6 +68,11 @@ export function resolveAdapterConfig(config?: AdapterConfig): AdapterConfig {
             if (!resolved.token) {
                 resolved.token = process.env['GH_TOKEN'];
             }
+            // Optional branch of the content repo (e.g. a `data` branch of the website repo).
+            const envBranch = process.env['DATA_REPOSITORY_BRANCH']?.trim();
+            if (!resolved.branch && envBranch) {
+                resolved.branch = envBranch;
+            }
         } else {
             resolved.localPath = DEFAULT_CONTENT_DIR;
         }
